@@ -1,0 +1,17 @@
+div.navtree-ascii { background-color: #1b1d1e; }
+div.navtree-ascii { min-height: 400px; }
+div.navtree-ascii { width: 200px; }
+div.navtree-ascii { position: relative; }
+div.navtree-ascii { overflow: hidden; }
+
+div.navtree-ascii * { font-family: monospace, monaco; }
+div.navtree-ascii * { letter-spacing: 0px; }
+div.navtree-ascii * { font-size: 14px; }
+div.navtree-ascii * { font-weight: 900; }
+
+div.navtree-ascii a { text-decoration: none; }
+div.navtree-ascii a { color: #bbda1e; }
+
+span.nav { color: #6590ae; }
+span.nav { overflow: hidden; }
+span.nav { position: relative; }

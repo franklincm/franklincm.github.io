@@ -1,0 +1,96 @@
+div.powerline {
+    font-size: 12px;
+    font-weight: bold;
+    height: 20px;
+    width: 100%;
+    background-color: #303030;
+    text-align: center;
+    line-height: 15px;
+    position: relative;
+    top: -5px;
+    -webkit-border-bottom-right-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -moz-border-radius-bottomright: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    box-shadow: 5px 5px 5px #444;
+    clear: both;
+
+}
+
+div.powerline div {
+    display: inline;
+    margin: 0px;
+    padding: 0px;
+}
+
+div.powerline span { margin: 5px; }
+div.powerline span { color: #d0d0d0; }
+div.powerline span { font-weight: bold; }
+
+.l1, .l2, .l3 {
+    width: 17px;
+    height: 20px;
+    float: left;
+}
+
+.r1, .r2, .r3 {
+    width: 17px;
+    height: 20px;
+    float: right;
+}
+
+div.l1 { background-image: url('../img/powerline/dark/x20-join-left-green-grey.jpg'); }
+div.l2 { background-image: url('../img/powerline/dark/x20-join-left-grey-darkgrey.jpg'); }
+/* div.l3 { background-image: url('../img/powerline/x20-arrow-left-green-grey.jpg'); } */
+div.r1 { background-image: url('../img/powerline/dark/x20-join-right-white-grey.jpg'); }
+div.r2 { background-image: url('../img/powerline/dark/x20-join-right-grey-darkgrey.jpg'); }
+div.r3 { background-image: url('../img/powerline/dark/x20-arrow-right-grey-darkgrey.jpg'); }
+
+.text-left1, .text-left2, .text-left3 { float: left; height: 20px;}
+.text-right1, .text-right2, .text-right3 { float: right; height: 20px; }
+
+div.text-left1 {
+    color: #005c03;
+    background-color: #abe028;
+
+    -webkit-border-bottom-left-radius: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    border-bottom-left-radius: 5px;
+}
+div.text-left1 a { color: #005c03; }
+
+div.text-left2 {
+    color: #d0d0d0;
+    background-color: #585858;
+}
+div.text-left2 a { color: #d0d0d0; }
+
+div.text-left3 {
+    color: #f0f0f0;
+    background-color: #303030;
+}
+div.text-left3 a { color: #f0f0f0; }
+
+div.text-right1 {
+    color: #1b1d1e;
+    background-color: #d0d0d0;
+
+    -webkit-border-bottom-right-radius: 5px;
+    -moz-border-radius-bottomright: 5px;
+    border-bottom-right-radius: 5px;
+}
+div.text-right1 a { color: #1b1d1e; }
+
+div.text-right2 {
+    color: #d0d0d0;
+    background-color: #585858;
+}
+div.text-right2 a { color: #d0d0d0; }
+
+div.text-right3 {
+    color: #d0d0d0;
+    background-color: #303030;
+}
+div.text-right3 a { color: #d0d0d0; }

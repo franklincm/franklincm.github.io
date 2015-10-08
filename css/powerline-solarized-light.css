@@ -1,0 +1,90 @@
+div.powerline {
+    font-size: 12px;
+    font-weight: bold;
+    height: 20px;
+    width: 100%;
+    background-color: #fdf6e3;
+    text-align: center;
+    line-height: 20px;
+    position: relative;
+    top: -5px;
+    box-shadow: 5px 5px 5px #444;
+    clear: both;
+    overflow: hidden;
+}
+
+div.powerline div {
+    display: inline;
+    margin: 0px;
+    padding: 0px;
+}
+
+div.powerline span { margin: 5px; }
+div.powerline span { color: #323232; }
+div.powerline span { font-weight: bold; }
+
+.l1, .l2, .l3, .l4 {
+    width: 17px;
+    height: 20px;
+    float: left;
+}
+
+div.git {
+    width: 14px;
+    height: 20px;
+    float: left;
+}
+
+.r1, .r2, .r3 {
+    width: 17px;
+    height: 20px;
+    float: right;
+}
+
+div.l1 { background-image: url('../img/powerline/solarized-light/x20-join-left-red-green.jpg'); }
+div.l2 { background-image: url('../img/powerline/solarized-light/x20-join-left-green-blue.jpg'); }
+div.l3 { background-image: url('../img/powerline/solarized-light/x20-join-left-blue-grey.jpg'); }
+div.l4 { background-image: url('../img/powerline/solarized-light/x20-join-left-grey-white.jpg'); }
+div.git { background-image: url('../img/powerline/solarized-light/git-fork.png'); }
+div.r1, div.r2 { background-image: url('../img/powerline/solarized-light/x20-arrow-right-blue-grey.jpg'); }
+div.r3 { background-image: url('../img/powerline/solarized-light/x20-join-right-grey-white.jpg'); }
+
+.text-left1, .text-left2, .text-left3, .text-left4 { float: left; height: 20px; }
+.text-right1, .text-right2, .text-right3 { float: right; height: 20px; }
+
+div.text-left1 {
+    border-left: 10px solid #323232; 
+    color: #372934;
+    background-color: #dc322f;
+}
+div.text-left1 a { color: #372934; }
+
+div.text-left2 {
+    color: #fdf6e3;
+    background-color: #859900;
+    width: 150px;
+    overflow: hidden;
+    text-align: left;
+}
+div.text-left2 a { color: #d0d0d0; }
+
+div.text-left3 {
+    color: #f0f0f0;
+    background-color: #657b83;
+}
+div.text-left3 a { color: #f0f0f0; }
+
+div.text-left4 {
+    color: #eee8d5;
+    background-color: #93a1a1;
+}
+div.text-left4 a { color: #eee8d5; }
+
+.text-right1, .text-right2, .text-right3  {
+    color: #fdf6d3;
+    background-color: #93a1a1;
+}
+.text-right1 a {}
+.text-right2 a {}
+.text-right3 a { color: #1b1d1e; }
+

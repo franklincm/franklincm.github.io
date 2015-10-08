@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'chemistryregular';
+    src: url('/font/chemistr-webfont.eot');
+    src: url('/font/chemistr-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/font/chemistr-webfont.woff2') format('woff2'),
+         url('/font/chemistr-webfont.woff') format('woff'),
+         url('/font/chemistr-webfont.ttf') format('truetype'),
+         url('/font/chemistr-webfont.svg#chemistryregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}

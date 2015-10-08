@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta charset="UTF-8">
+      <!-- Bootstrap -->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" media="screen" href="/css/bootstrap.min.css">
+      <link href="/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+      <!-- syntax highlighting -->
+      <link rel="stylesheet" href="/css/pygments/native.css">
+      <!-- Overrides -->
+      <link rel="stylesheet" href="/css/layout.css">
+      <link rel="stylesheet" href="/css/chemistryregular.css">
+      <link rel="stylesheet" href="/css/solarized-light.css">
+      <link rel="stylesheet" href="/css/navtree-ascii-solarized-light.css">
+      <link rel="stylesheet" href="/css/powerline-solarized-light.css">
+      <link rel="icon" href="/img/favicon.ico?v=2" sizes="16x16 24x24 32x32 64x64" type="image/vnd.microsoft.icon">
+      <!-- mathjax -->
+      <script type="text/javascript" src="/js/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <title>dotcolors - manage Xresources themes - miscBitsOfData</title>
+    </head>
+    <body>
+
+        <div class="container">
+            <a href="/"><h1 class="title">// miscbitsofdata</h1></a>
+
+            <div class="main">
+                <div class="side">
+		    <div class="navtree-ascii">
+    <span class="nav drop">[-]&nbsp;~/<br />
+	&nbsp;|~&nbsp;<a href="/">posts</a><br />
+        &nbsp;|&nbsp;&nbsp;|<br />
+	&nbsp;|&nbsp;&nbsp;`-<a href="/by-year">by year</a><br />
+        &nbsp;|<br />
+	&nbsp;|~&nbsp;odds & ends<br />
+        &nbsp;|&nbsp;&nbsp;|<br />
+	&nbsp;|&nbsp;&nbsp;`-<a href="/calendar/index.php">calendar</a><br />
+	&nbsp;|<br />
+	&nbsp;`~&nbsp;<a href="/tags/index.html">tags</a><br />
+    </span>
+    <span class="nav fill">
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+    </span>
+</div>
+
+                </div>
+                <div class="view ">
+                    <div class="content">
+			<div class="post">
+    <h1>dotcolors - manage Xresources themes</h1>
+    <date>05 Mar 2014</date>
+    
+    <author>Author: <span>chase</span></author>
+    
+    <hr />
+    <p>Last night I was looking at a simple litte tool I made to make changing my terminal themes easier called <a href="https://pypi.python.org/pypi/dotcolors/">dotcolors</a>, and decided to finally knock out a couple items on the TODO list for it.</p>
+
+<p><a href="https://pypi.python.org/pypi/dotcolors/">dotcolors</a> isn&#39;t anything special but it is handy it you&#39;re addicted to <a href="https://wiki.archlinux.org/index.php/rxvt-unicode">urxvt</a> and tweaking appearance settings like I am. Simply put, it downloads .Xresources configs from <a href="http://dotshare.it/">dotshare.it</a> and provides a simple menu to change and apply those settings easily.</p>
+
+<h2>Usage</h2>
+
+<p>It already had some command line switches to get themes, or change how many themes to display per page etc:
+<figure class="code"><figcaption></figcaption>
+<div class="highlight"><pre><code class="make">    Usage:
+    dotcolors <span class="o">[</span>-h<span class="o">]</span>
+    dotcolors <span class="o">[</span>-s<span class="o">]</span> <span class="o">[(</span>-r &lt;per<em>page&gt;<span class="o">)]</span> <span class="o">[</span>-t<span class="o">]</span>
+    dotcolors <span class="o">[(</span>-s &lt;limit&gt;<span class="o">)]</span> <span class="o">[(</span>-r &lt;per</em>page&gt;<span class="o">)]</span> <span class="o">[</span>-t<span class="o">]</span>
+    dotcolors <span class="o">[</span>--setup<span class="o">]</span></p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">-h, --help     Display this screen
+
+-r, --results  Number of results to display per page
+
+-s, --sync     Download themes, optionally limit the
+                  number of themes downloaded with &amp;lt;limit&amp;gt;,
+                                    &lt;span class=&quot;nv&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;all
+
+--setup       create default directorie and config
+
+-t, --test     Apply changes without writing to file
+</code></pre></div>
+<p></code></pre></div>
+</figure></p>
+
+<h2>Menu</h2>
+
+<p>And the menu is essentially the same except now it can set my transparency, as well as attempts to auto format (read: strip junk from) the config files it downloads. Also you can set a prefix for your ~/.Xresources, the default is <code>urxvt</code> but if you insist on using eterm or what have you this <em>should</em> work. Otherwise you&#39;ll just have to edit you&#39;re configs the old fashioned way.
+<figure class="code"><figcaption></figcaption>
+<div class="highlight"><pre><code class="make"><span class="err">==============================</span>
+<span class="err">page</span> <span class="err">(1/10)</span>
+<span class="err">-----------</span>
+ <span class="err">1)</span> <span class="err">1dimensional</span>
+ <span class="err">2)</span> <span class="err">5centimeters</span>
+ <span class="err">3)</span> <span class="err">8bit</span>
+ <span class="err">4)</span> <span class="err">Ambiance</span>
+ <span class="err">5)</span> <span class="err">AquaQ</span>
+ <span class="err">6)</span> <span class="err">Atari</span>
+ <span class="err">7)</span> <span class="err">Barrage</span>
+ <span class="err">8)</span> <span class="err">BitMute</span>
+ <span class="err">9)</span> <span class="err">Bleh-1</span>
+<span class="err">10)</span> <span class="err">Bleh-2</span>
+<span class="err">11)</span> <span class="err">Bryter</span>
+<span class="err">12)</span> <span class="err">Candy</span>
+<span class="err">13)</span> <span class="err">Chocolate</span>
+<span class="err">14)</span> <span class="err">Classy</span>
+<span class="err">15)</span> <span class="nv">Cloud</span>
+<span class="o">==============================</span>
+<span class="nf">Current theme is</span><span class="o">:</span> <span class="m">enso</span>
+<span class="nf">Transparency</span><span class="o">:</span> <span class="m">%75</span>
+<span class="err">==============================</span>
+<span class="nf">(j/k)</span><span class="o">:</span> <span class="m">Next/Previous page</span><span class="p">,</span><span class="m"> (J/K): Transparency Down/Up</span>
+<span class="nf">(P/p)</span><span class="o">:</span> <span class="m">set prefix</span><span class="p">,</span><span class="m">         (Q/q): Quit</span>
+<span class="err">Or</span> <span class="err">simply</span> <span class="err">enter</span> <span class="err">the</span> <span class="err">number</span> <span class="err">of</span> <span class="err">a</span> <span class="err">theme</span>
+<span class="err">&gt;</span>
+</code></pre></div>
+</figure></p>
+
+    <hr />
+
+    
+    <p><span>Chase Franklin</span> : <a href="https://github.com/gnullbyte">github.com/gnullbyte</a><br/>
+<pre class="contact">echo sjtqnjm.pvjru@lxv | tr a-z@. r-za-q.@</pre><br /></p>
+
+    
+    <span class="random">/dev/random</span>
+    <blockquote class="fortune"><pre>Oh, you think you're doing some damage? Two plus two is [static] …
+ten. In base four! I'm fine!
+</pre></blockquote>
+</div>
+
+                    </div>
+                </div>
+
+            </div> <!-- main -->
+	    <div class="powerline">
+  <div class="text-left1">
+    <a href="">&nbsp; mbod </a>
+  </div>
+  <div class="l1"></div>
+  <div class="text-left2 hidden-xs hidden-sm ">dotcolors-manage-xresources-themes.html</div>
+  <div class="l2"></div>
+  <div class="git"></div>
+  <div class="text-left3 hidden-xs">&nbsp;working</div>
+  <div class="l3"></div>
+  <div class="text-left4 hidden-xs">current</div>
+  <div class="l4"></div>
+  <span class=""><!-- center text --></span>
+  <div class="text-right1">linux&nbsp;</div>
+  <div class="r1"></div>
+  <div class="text-right2 hidden-xs">programming</div>
+  <div class="r2"></div>
+  <div class="text-right3 hidden-xs hidden-sm">rants</div>
+  <div class="r3"></div>
+</div>
+
+            <div class="footer">&copy; 2014 miscbitsofdata.com</div>
+        </div><!-- container -->
+
+      <!--  bootstrap js  -->
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/eHeight.js"></script>
+<script type="text/javascript" src="/js/aHeight.js"></script>
+<!-- <script type="text/javascript" src="/js/fill.js"></script> -->
+
+    </body>
+</html>

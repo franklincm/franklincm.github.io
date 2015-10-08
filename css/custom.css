@@ -1,0 +1,210 @@
+@charset "utf-8";
+body { 
+  background: url('../img/grey-gradient-background-dark.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+* {
+    font-family: Meslo LG L DZ for Powerline;
+}
+
+h1.title {
+    color: #e7e7e7;
+    font-size: 24px;
+    font-family: monospace;
+    text-shadow: 5px 5px 5px #303030;
+}
+.container { padding-top: 50px; }
+.heading {
+    font-family: monaco, monospace;
+    font-size: 26px;
+    font-weight: normal;
+    color: #b00000;
+}
+hr.vim { border-top: solid 1px black; }
+div.fold {
+    color: #fff;
+    background-color: #1b1d1e;
+    opacity: 1.0;
+    font-family: monospace;
+    font-size: 1em;
+    text-align: left;
+    overflow: hidden; 
+    white-space: nowrap;
+    margin-bottom: 20px;
+    padding: 0px;
+    height: 25px;
+    font-weight: bolder;
+}
+ul.posts{ margin: 0px; }
+ul.posts li{ line-height: 20px; }
+ul.posts span {
+    font-size: 14px;
+    color: #93a1a1;
+}
+ul.posts span span {
+    font-size: 10px;
+    color: #2aa198;
+}
+ul.posts span span span {
+    font-size: 14px;
+    color: #abe028;
+}
+ul.posts span span span span {
+    font-size: 14px;
+    color: #93a1a1;
+}
+
+ul.posts li a:active {
+    text-decoration: none;
+}
+ul.posts li a:visited {
+    text-decoration: none;
+}
+ul.posts li a:hover span span span span { /* ----- */
+    color: #d33682; 
+    text-decoration: none;
+}
+ul.posts li a:hover span span span  { /* {{ post.title }} */
+    color: #fff;
+    text-decoration: none;
+}
+ul.posts li a:hover span span  { /* {{ word_count }} */
+    color: #2aa198;
+    text-decoration: none;
+}
+ul.posts li a:hover span { /* +-- */
+    color: #d33682;
+    text-decoration: none;
+}
+ul posts li a:active span span span span { text-decoration: none; }
+ul posts li a:active span span span { text-decoration: none; }
+ul posts li a:active span span { text-decoration: none; }
+ul posts li a:active span { text-decoration: none; }
+ul posts li a:visited span span span span { text-decoration: none; }
+ul posts li a:visited span span span { text-decoration: none; }
+ul posts li a:visited span span { text-decoration: none; }
+ul posts li a:visited span { text-decoration: none; }
+
+ul.posts li a { color: #abe028; }
+ul.posts li a:hover {
+    text-decoration: none;
+}
+ul.posts li small {
+    color: #93a1a1;
+}
+
+div.copy { text-align: right; }
+.main { border-top: 10px solid #e7e7e7; }
+.main { border-left: 10px solid #e7e7e7; }
+.main { height: 800px; } 
+
+.main { position: relative; }
+/* .main { overflow: scroll; } */
+/* .main { margin-bottom: 50px; } */
+
+
+.main {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px #444;
+    background-color: #1b1d1e;
+
+/*    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box; */
+
+}
+.main div.view {
+    background: #232526;
+    border-style: solid; 
+/*
+    border-width: 0px 10px 0px 10px;
+    -moz-border-image: url(../img/emacs/border-grey-black.png) 0 10 0 10 repeat; 
+    -webkit-border-image: url(../img/emacs/border-grey-black.png) 0 10 0 10 repeat; 
+    -o-border-image: url(../img/emacs/border-grey-black.png) 0 10 0 10 repeat; 
+    border-image: url(../img/emacs/border-grey-black.png) 0 10 0 10 fill repeat;
+*/
+    margin: 0px 0px 0px 210px;
+    height: inherit;
+    overflow-y: scroll;
+
+    border-style: solid;
+    border-width: 0px 0px 0px 10px;
+    -moz-border-image: url(../img/emacs/border-grey-black.png) 0 0 0 10 repeat;
+    -webkit-border-image: url(../img/emacs/border-grey-black.png) 0 0 0 10 repeat;
+    -o-border-image: url(../img/emacs/border-grey-black.png) 0 0 0 10 repeat;
+    border-image: url(../img/emacs/border-grey-black.png) 0 0 0 10 repeat;
+}
+
+.main div.content {
+    padding: 10px 0 0 0;
+}
+
+.main div.content div.post {
+    padding: 0px 20px 10px 20px;
+}
+
+.main div.side { 
+    background-color: #1b1d1e;
+    position: relative;
+    float: left;
+    width: 200px;
+    min-height: 400px;
+    overflow: hidden;
+ }
+figure.code {
+    margin: 20px 0 20px 0;
+    overflow-x: auto;
+    border-top: 0px solid #babab6;
+    border-bottom: 0px solid #babab6;
+    border: 1px solid #657b83;
+}
+
+.highlight pre {
+    white-space: pre;
+    overflow: auto;
+}
+
+pre code {
+    white-space: pre;
+    overflow: auto;
+}
+pre {
+    border: 0px;
+    background-color: #1b1d1e;
+    display: block;
+    font-size: 13px;
+    line-height: 15px;
+    padding: 9.5px;
+    margin: 0px;
+    white-space: pre;
+    overflow-x: auto;
+}
+
+.linenos pre {
+    border-style: solid; 
+    border-width: 0px 10px 0 0;
+    -moz-border-image: url(../img/emacs/border-grey-black-LR.png) 0 10 repeat; 
+    -webkit-border-image: url(../img/emacs/border-grey-black-LR.png) 0 10 repeat; 
+    -o-border-image: url(../img/emacs/border-grey-black-LR.png) 0 10 repeat; 
+    border-image: url(../img/emacs/border-grey-black-LR.png) 0 10 fill repeat;
+    color: #b2b7bd;
+    font-weight: bold;
+}
+.bash {
+    color: #f4f4ee;
+}
+
+div.pagination {
+    text-align: right;
+    padding: 5px;
+}
+
+p div.MathJax_Display {
+    color: #0f0;
+}

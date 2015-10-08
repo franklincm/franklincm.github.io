@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta charset="UTF-8">
+      <!-- Bootstrap -->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" media="screen" href="/css/bootstrap.min.css">
+      <link href="/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+      <!-- syntax highlighting -->
+      <link rel="stylesheet" href="/css/pygments/native.css">
+      <!-- Overrides -->
+      <link rel="stylesheet" href="/css/layout.css">
+      <link rel="stylesheet" href="/css/chemistryregular.css">
+      <link rel="stylesheet" href="/css/solarized-light.css">
+      <link rel="stylesheet" href="/css/navtree-ascii-solarized-light.css">
+      <link rel="stylesheet" href="/css/powerline-solarized-light.css">
+      <link rel="icon" href="/img/favicon.ico?v=2" sizes="16x16 24x24 32x32 64x64" type="image/vnd.microsoft.icon">
+      <!-- mathjax -->
+      <script type="text/javascript" src="/js/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <title>jekyll fortunes - miscBitsOfData</title>
+    </head>
+    <body>
+
+        <div class="container">
+            <a href="/"><h1 class="title">// miscbitsofdata</h1></a>
+
+            <div class="main">
+                <div class="side">
+		    <div class="navtree-ascii">
+    <span class="nav drop">[-]&nbsp;~/<br />
+	&nbsp;|~&nbsp;<a href="/">posts</a><br />
+        &nbsp;|&nbsp;&nbsp;|<br />
+	&nbsp;|&nbsp;&nbsp;`-<a href="/by-year">by year</a><br />
+        &nbsp;|<br />
+	&nbsp;|~&nbsp;odds & ends<br />
+        &nbsp;|&nbsp;&nbsp;|<br />
+	&nbsp;|&nbsp;&nbsp;`-<a href="/calendar/index.php">calendar</a><br />
+	&nbsp;|<br />
+	&nbsp;`~&nbsp;<a href="/tags/index.html">tags</a><br />
+    </span>
+    <span class="nav fill">
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+      ~<br />
+    </span>
+</div>
+
+                </div>
+                <div class="view ">
+                    <div class="content">
+			<div class="post">
+    <h1>jekyll fortunes</h1>
+    <date>01 Feb 2014</date>
+    
+    <author>Author: <span>chase</span></author>
+    
+    <hr />
+    <p>Requires <a href="http://en.wikipedia.org/wiki/Fortune_(Unix)">fortune-mod</a>. For arch users: <code>pacman -S fortune-mod</code>. I&#39;m currently using <strong>fortune-mod-hitchhiker</strong> from the <a href="https://aur.archlinux.org/">Arch User Repositories</a>.</p>
+
+<p>Place in _plugins/</p>
+
+<figure class="code"><figcaption></figcaption>
+<div class="highlight"><pre><code class="ruby"><span class="c1"># fortune.rb</span>
+<span class="k">module</span> <span class="nn">Jekyll</span>
+  <span class="k">class</span> <span class="nc">Fortune</span> <span class="o">&lt;</span> <span class="no">Liquid</span><span class="o">::</span><span class="no">Tag</span>
+
+    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">tag_name</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">tokens</span><span class="p">)</span>
+      <span class="k">super</span>
+      <span class="vi">@text</span> <span class="o">=</span> <span class="n">text</span>
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+      <span class="n">fortune</span> <span class="o">=</span> <span class="sb">`fortune </span><span class="si">#{</span><span class="vi">@text</span><span class="si">}</span><span class="sb">`</span>
+      <span class="s2">&quot;</span><span class="si">#{</span><span class="n">fortune</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+<span class="no">Liquid</span><span class="o">::</span><span class="no">Template</span><span class="o">.</span><span class="n">register_tag</span><span class="p">(</span><span class="s1">&#39;fortune&#39;</span><span class="p">,</span> <span class="no">Jekyll</span><span class="o">::</span><span class="no">Fortune</span><span class="p">)</span>
+</code></pre></div>
+</figure>
+
+<p><a href="https://gist.github.com/gnullbyte/8774825">Here is the gist.</a></p>
+
+<p>To use:
+<figure class="code"><figcaption></figcaption>
+<div class="highlight"><pre><code class="html"><span class="nt">&lt;blockquote&gt;&lt;pre&gt;</span> {% fortune %}  <span class="nt">&lt;/pre&gt;&lt;/blockquote&gt;</span>
+</code></pre></div>
+</figure></p>
+
+<p>See <code>man fortune</code> for details. The liquid tag will pass any arguments through to fortune.</p>
+
+<p>For example, I use:
+<figure class="code"><figcaption></figcaption>
+<div class="highlight"><pre><code class="bash">&lt;blockquote&gt;&lt;pre&gt; <span class="o">{</span>% fortune hitchhiker%<span class="o">}</span>  &lt;/pre&gt;&lt;/blockquote&gt;
+</code></pre></div>
+</figure></p>
+
+<p>which generates fortune cookies from Hitchhiker&#39;s Guide.</p>
+
+<p>So now that that&#39;s all setup and jekyll hasn&#39;t thrown any errors your way, your templates will have pseudo-random fortune cookies every time you regenerate your site.</p>
+
+<p><em>See below for awesome!</em></p>
+
+    <hr />
+
+    
+    <p><span>Chase Franklin</span> : <a href="https://github.com/gnullbyte">github.com/gnullbyte</a><br/>
+<pre class="contact">echo sjtqnjm.pvjru@lxv | tr a-z@. r-za-q.@</pre><br /></p>
+
+    
+    <span class="random">/dev/random</span>
+    <blockquote class="fortune"><pre>The square root of rope is string.
+</pre></blockquote>
+</div>
+
+                    </div>
+                </div>
+
+            </div> <!-- main -->
+	    <div class="powerline">
+  <div class="text-left1">
+    <a href="">&nbsp; mbod </a>
+  </div>
+  <div class="l1"></div>
+  <div class="text-left2 hidden-xs hidden-sm ">jekyll-fortunes.html</div>
+  <div class="l2"></div>
+  <div class="git"></div>
+  <div class="text-left3 hidden-xs">&nbsp;working</div>
+  <div class="l3"></div>
+  <div class="text-left4 hidden-xs">current</div>
+  <div class="l4"></div>
+  <span class=""><!-- center text --></span>
+  <div class="text-right1">linux&nbsp;</div>
+  <div class="r1"></div>
+  <div class="text-right2 hidden-xs">programming</div>
+  <div class="r2"></div>
+  <div class="text-right3 hidden-xs hidden-sm">rants</div>
+  <div class="r3"></div>
+</div>
+
+            <div class="footer">&copy; 2014 miscbitsofdata.com</div>
+        </div><!-- container -->
+
+      <!--  bootstrap js  -->
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/eHeight.js"></script>
+<script type="text/javascript" src="/js/aHeight.js"></script>
+<!-- <script type="text/javascript" src="/js/fill.js"></script> -->
+
+    </body>
+</html>
