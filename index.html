@@ -32,8 +32,6 @@
   <script type="text/javascript" src="assets/js/chartDefaults.js"></script>
   <script type="text/javascript" src="assets/js/binomial.js"></script>
 
-
-
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <!-- <link rel="icon" type="image/png" href="images/favicon.png"> -->
@@ -57,14 +55,28 @@
       <div class="four columns">
         <!-- CONTROLS
         –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-        <label for="tags">Number of Dice: </label>
-        <div id="slider-range-min"></div>
-        <div class="ui-widget">
-          <input id="tags">
-        </div>
+        <form class="controls">
+          <div class="row">
+            <div class="six columns">
+              <label for="diceInput">Dice Pool</label>
+              <input class="u-full-width" type="number" id="diceInput" value="10"/>
+              <div id="slider-range-min"></div>
+            </div>
+            <div class="six columns">
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="six columns">
+              <label>
+                <input id="disableAnim" type="checkbox">
+                <span class="label-body">Disable Animation</span>
+              </label>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
-
   </div>
   <div class="container">
     <div class="row">
@@ -74,6 +86,24 @@
     </div>
   </div>
   <script type="text/javascript">
+   var data = {
+       datasets: [
+           {
+               fillColor: "rgba(155, 204, 96, 0.2)",
+               strokeColor: "rgba(155, 204, 96, 1)",
+               pointColor: "rgba(227, 221, 201, 1)",
+               pointStrokeColor: "#2d2721",
+               pointHighlightFill: "#fff",
+               pointHighlightStroke: "rgba(151,187,205,1)",
+               data: []
+           }
+       ]
+   };
+   var options = {
+       scaleShowGridLines : true,
+       scaleGridLineColor : "rgba(230, 230, 230, .2)",
+       scaleGridLineWidth : 1
+   };
    function updatePoint(chart, dataset, point, val) {
        chart.datasets[dataset].points[point].value = val;
        chart.update();
@@ -81,25 +111,9 @@
 
    function updateChart(chart, context, numDice) {
 
-       var data = {
-           labels: range(0,(numDice)+1).map(String),
-           datasets: [
-               {
-                   fillColor: "rgba(155, 204, 96, 0.2)",
-                   strokeColor: "rgba(155, 204, 96, 1)",
-                   pointColor: "rgba(227, 221, 201, 1)",
-                   pointStrokeColor: "#2d2721",
-                   pointHighlightFill: "#fff",
-                   pointHighlightStroke: "rgba(151,187,205,1)",
-                   data: cdfGreaterThanOrEqual(numDice, 1/3).yVals
-               }
-           ]
-       };
-       var options = {
-           scaleShowGridLines : true,
-           scaleGridLineColor : "rgba(230, 230, 230, .2)",
-           scaleGridLineWidth : 1
-       };
+       data.labels = range(0,(numDice)+1).map(String);
+       data.datasets[0].data = cdfGreaterThanOrEqual(numDice, 1/3).yVals;
+       Chart.defaults.global.animation = !$("#disableAnim").is(":checked");
 
        chart = new Chart(context).Line(data, options);
        //chart.update();
@@ -112,13 +126,14 @@
        updateChart(LineChart, ctx, defaultDice);
 
        // ----------------------CONTROLS---------------------------
+
        $("#slider-range-min").slider({
            range: "min",
            value: defaultDice,
            min: 1,
            max: 50,
            slide: function (event, ui) {
-               $("#tags").val(ui.value);
+               $("#diceInput").val(ui.value);
                updateChart(LineChart, ctx, ui.value);
            },
            change: function (event, ui) {
@@ -126,8 +141,8 @@
                updateChart(LineChart, ctx, ui.value);
            }
        });
-       $("#tags").val($("#slider-range-min").slider("value"));
-       $("#tags").change(function() {
+       $("#diceInput").val($("#slider-range-min").slider("value"));
+       $("#diceInput").change(function() {
            var newVal = $(this).val();
            if(newVal > 0 && newVal <= 50) {
                $( "#slider-range-min" ).slider( "option", "value", newVal );
