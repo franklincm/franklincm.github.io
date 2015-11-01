@@ -20,17 +20,20 @@
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="stylesheet" href="assets/css/normalize.css">
-  <link rel="stylesheet" href="assets/css/skeleton.css">
+  <link rel="stylesheet" href="assets/css/uikit.gradient.min.css">
   <link rel="stylesheet" href="assets/css/jquery-ui.min.css">
   <link rel="stylesheet" href="assets/css/custom.css">
 
   <!-- JS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script type="text/javascript" src="assets/js/binomial.js"></script>
   <script type="text/javascript" src="assets/js/jquery.js"></script>
   <script type="text/javascript" src="assets/js/jquery-ui.min.js"></script>
-  <script type="text/javascript" src="assets/js/Chart.min.js"></script>
-  <script type="text/javascript" src="assets/js/chartDefaults.js"></script>
-  <script type="text/javascript" src="assets/js/binomial.js"></script>
+  <script type="text/javascript" src="assets/js/uikit.min.js"></script>
+  <script type="text/javascript" src="assets/js/components/accordion.min.js"></script>
+  <script type="text/javascript" src="assets/js/moment.min.js"></script>
+  <script type="text/javascript" src="assets/js/Chart.js"></script>
+
 
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -38,95 +41,135 @@
 
 </head>
 <body>
-  <div class="container">
-    <div class="row">
-      <div class="twelve columns">
-        <h1>dieStats</h1>
-      </div>
+  <div class="uk-grid">
+    <div class="uk-width-large-1-5">
     </div>
-  </div>
-  <div class="container main">
-    <div class="row">
-      <div class="eight columns graph">
-        <!-- GRAPH
-        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-        <canvas id="myChart" width="400" height="400"></canvas>
+    <div class="uk-width-large-3-5">
+      <div class="uk-grid">
+        <div class="uk-width-1-1 title">
+          <h1>dieStats</h1>
+        </div>
       </div>
-      <div class="four columns">
+      <div class="uk-grid main">
+
+        <div class="uk-width-large-8-10 graph">
+
+          <!-- GRAPH
+          –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+          <canvas id="myChart" width="268.3698760724499" height="150"></canvas>
+        </div>
         <!-- CONTROLS
         –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-        <form class="controls">
-          <div class="row">
-            <div class="six columns">
-              <label for="diceInput">Dice Pool</label>
-              <input class="u-full-width" type="number" id="diceInput" value="10"/>
-              <div id="slider-range-min"></div>
+        <div class="uk-width-large-2-10 controls">
+          <div class="uk-accordion" data-uk-accordion>
+            <h3 class="uk-accordion-title" data="dice"><i class="uk-icon-caret-down"></i> Dice Pool</h3>
+            <div class="uk-accordion-content">
+              <form class="dicePool uk-form">
+                <input class="numInput" type="number" id="diceInput" />
+                <label for="diceInput">Number of Dice</label>
+                <div id="slider-range-min"></div>
+              </form>
             </div>
-            <div class="six columns">
-
+            <h3 class="uk-accordion-title" data="findN"><i class="uk-icon-caret-right"></i> Find N</h3>
+            <div class="uk-accordion-content">
+              <form class="findn uk-form">
+                <input class="numInput" type="number" id="hitInput" value="4"/>
+                <label for="hitInput">Desired Hits</label>
+                <br/>
+                <input class="numInput" type="number" id="probInput" value="75"/>
+                <label for="probInput">Desired Probability</label>
+                <button id="findN">Compute</button>
+                <br/>
+                <br/>
+                <label for="result">n = </label>
+                <input class="numInput" type="text" id="result" value="" disabled="disabled"/>
+              </form>
             </div>
-          </div>
-          <div class="row">
-            <div class="six columns">
+            <h3 class="uk-accordion-title" data="options"><i class="uk-icon-caret-right"></i> Options</h3>
+            <div class="uk-accordion-content">
               <label>
                 <input id="disableAnim" type="checkbox">
                 <span class="label-body">Disable Animation</span>
               </label>
             </div>
-          </div>
-        </form>
+            <div class="instr dice"><p>Input number of dice to view the associated binomial distribution.</p></div>
+            <div class="instr findN uk-hidden"><p>Input desired hits and probability to find associated dice pool size.</p></div>
+            <div class="instr options uk-hidden"><p>Hopefully self-explanatory...</p></div>
+          </div> <!-- accordion -->
+
+        </div> <!-- 2-10 -->
+      </div> <!-- inner grid -->
+      <div class="uk-width-1-1 title">
+        <span class="credit">Powered by <a href="http://www.chartjs.org/"><img src="assets/img/chartjs.png">Chart.js</a></span>
       </div>
+
+    </div> <!-- 3-5 -->
+    <div class="uk-width-large-1-5">
     </div>
-  </div>
-  <div class="container">
-    <div class="row">
-      <div class="twelve columns">
-        <span>Powered by <a href="http://www.chartjs.org/">Chart.js</a></span>
-      </div>
-    </div>
-  </div>
+
+  </div> <!-- outer grid -->
+
   <script type="text/javascript">
-   var data = {
-       datasets: [
-           {
-               fillColor: "rgba(155, 204, 96, 0.2)",
-               strokeColor: "rgba(155, 204, 96, 1)",
-               pointColor: "rgba(227, 221, 201, 1)",
-               pointStrokeColor: "#2d2721",
-               pointHighlightFill: "#fff",
-               pointHighlightStroke: "rgba(151,187,205,1)",
-               data: []
-           }
-       ]
-   };
-   var options = {
-       scaleShowGridLines : true,
-       scaleGridLineColor : "rgba(230, 230, 230, .2)",
-       scaleGridLineWidth : 1
-   };
-   function updatePoint(chart, dataset, point, val) {
-       chart.datasets[dataset].points[point].value = val;
+   function updateChart(chart, ctx, value) {
+       chart.data.labels = range(0, value + 1).map(String);
+       chart.data.datasets[0].data = cdfGreaterThanOrEqual(value, 1/3).yVals;
+       var disableAnimation = $("#disableAnim").prop("checked");
+       if (disableAnimation) {
+           chart.options.animation.duration = 0;
+       } else {
+           chart.options.animation.duration = 1000;
+       }
+
        chart.update();
    }
-
-   function updateChart(chart, context, numDice) {
-
-       data.labels = range(0,(numDice)+1).map(String);
-       data.datasets[0].data = cdfGreaterThanOrEqual(numDice, 1/3).yVals;
-       Chart.defaults.global.animation = !$("#disableAnim").is(":checked");
-
-       chart = new Chart(context).Line(data, options);
-       //chart.update();
-   }
    $(document).ready(function() {
-       // ----------------------CHART------------------------------
+       // disable enter to submit
+       $(window).keydown(function(event) {
+           if ((event.keyCode == 13)) {
+               $("#diceInput").trigger("change");
+               return false;
+           }
+       });
+
+       var data = {
+           labels: range(0, 11).map(String),
+           datasets: [
+               {
+                   label: 'Probability',
+                   fill: true,
+                   backgroundColor: "rgba(155, 204, 96, 0.1)",
+                   borderColor: "rgba(155, 204, 96, 1)",
+                   borderCapStyle: 'round',
+                   borderDash: [],
+                   borderDashOffset: 0.0,
+                   borderJoinStyle: 'round',
+                   pointBackgroundColor: "#2d2721",
+                   pointBorderColor: "#9bcc60",
+                   pointBorderWidth: 1,
+                   pointHoverRadius: 6,
+                   pointHoverBackgroundColor: "#2d2721",
+                   pointHoverBorderColor: "#e6e6e6",
+                   pointHoverBorderWidth: 3,
+                   data: cdfGreaterThanOrEqual(10, 1/3).yVals
+               }
+           ]
+       };
+       var options = {
+           tooltips: {
+               mode: 'label'
+           },
+           hover: {
+               mode: 'label'
+           },
+       };
+       var ctx = $("#myChart");
+       var lineChart = new Chart(ctx, {
+           type: 'line',
+           data: data,
+           options: options,
+       });
+
        var defaultDice = 10;
-       var ctx = document.getElementById("myChart").getContext("2d");
-       var LineChart;
-       updateChart(LineChart, ctx, defaultDice);
-
-       // ----------------------CONTROLS---------------------------
-
        $("#slider-range-min").slider({
            range: "min",
            value: defaultDice,
@@ -134,21 +177,81 @@
            max: 50,
            slide: function (event, ui) {
                $("#diceInput").val(ui.value);
-               updateChart(LineChart, ctx, ui.value);
+               updateChart(lineChart, ctx, ui.value);
            },
            change: function (event, ui) {
-               //$("#tags").val(ui.value);
-               updateChart(LineChart, ctx, ui.value);
+               //$("#diceInput").val(ui.value);
+               updateChart(lineChart, ctx, ui.value);
            }
        });
-       $("#diceInput").val($("#slider-range-min").slider("value"));
-       $("#diceInput").change(function() {
-           var newVal = $(this).val();
-           if(newVal > 0 && newVal <= 50) {
+
+       $("#diceInput").spinner({
+           min: 1,
+           max: 50,
+           value: 10,
+           step: 1,
+           numberFormat: "n",
+           incremental: false,
+           spin: function(event, ui) {
+               var newVal = ui.value;
                $( "#slider-range-min" ).slider( "option", "value", newVal );
            }
        });
-   });
+
+       $("#hitInput").spinner({
+           min: 1,
+           max: 50,
+           value: 4,
+           step: 1,
+           numberFormat: "n",
+           change: function(event, ui) {
+               var newValue = $(this).val();
+               if (newValue > 50) {
+                   $(this).val(50);
+               } else if (newValue < 1) {
+                   $(this).val(1);
+               }
+           }
+       });
+       $("#probInput").spinner({
+           min: 0.01,
+           max: 1.00,
+           value: 0.75,
+           step: 0.01,
+           numberFormat: "n",
+           change: function(event, ui) {
+               var newValue = $(this).val();
+               if (newValue > 1.00) {
+                   $(this).val(1.00);
+               } else if (newValue < 0.01) {
+                   $(this).val(0.01);
+               }
+           }
+       });
+
+       $("#findN").button().click(function(event) {
+           event.preventDefault();
+           var hits = Number($("#hitInput").val());
+           var probability = Number($("#probInput").val());
+           var pool = find_n(hits, probability);
+           $("#result").val(pool);
+           updateChart(lineChart, ctx, pool);
+       })
+       $("#diceInput").val($("#slider-range-min").slider("value"));
+
+       $(".uk-accordion-title").click(function() {
+           var elem = '.' + $(this).attr('data');
+           $('.instr').addClass('uk-hidden');
+           $(elem).removeClass('uk-hidden');
+           $(".uk-icon-caret-down")
+              .removeClass("uk-icon-caret-down")
+              .addClass("uk-icon-caret-right");
+           $(this).children().removeClass("uk-icon-caret-right");
+           $(this).children().addClass("uk-icon-caret-down");
+       });
+
+   })
+
   </script>
 <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->

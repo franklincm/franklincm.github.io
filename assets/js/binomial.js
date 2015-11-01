@@ -92,3 +92,25 @@ function cdfGreaterThanOrEqual(n, p) {
     }
     return data;
 }
+
+
+/**
+ * Find necessary dice pool given x and p
+ * @param{Number} x, desired successes
+ * @param{Number} p, deisred probability
+ * @return{Number}
+ */
+function find_n(x, p) {
+    var n = 0;
+    n += (x);
+    var found = false;
+    while(!found) {
+        test = (1 - cdf(x-1, n, (1/3)))
+        if  ( test >= p ) {
+            found = true;
+        } else {
+            n += 1;
+        }
+    }
+    return n;
+}
