@@ -87,3 +87,8 @@ div.uk-grid.main {
   font-size: 22px;
   font-style: bold;
 }
+
+#slider-range-min {
+  -ms-touch-action: none;
+  touch-action: none;
+}
