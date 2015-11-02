@@ -121,13 +121,17 @@
            standard: 0,
            critical: 0,
        };
+
+       var half = (value % 2 == 0) ? ((value / 2) - 1) : Math.floor(value / 2);
+
        if (value % 2 == 0) {
-           Glitch.standard = (1 - cdf((value / 2) - 1, value, 1/6));
+           Glitch.standard = (1 - cdf(half, value, 1/6));
        } else {
-           Glitch.standard = (1 - cdf(Math.floor(value / 2), value, 1/6));
+           Glitch.standard = (1 - cdf(half, value, 1/6));
        }
+
        var zeroToTotalRatio = Math.pow(2/3, value);
-       var chanceGivenNoHits = 1 - cdf(0, value, 1/4);
+       var chanceGivenNoHits = 1 - cdf(half, value, 1/4);
        Glitch.critical = zeroToTotalRatio * chanceGivenNoHits;
        return Glitch;
    }
