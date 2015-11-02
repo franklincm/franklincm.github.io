@@ -87,7 +87,11 @@
                 <span class="label-body">Disable Animation</span>
               </label>
             </div>
-            <div class="instr dice"><p>Input number of dice to view the associated binomial distribution.</p></div>
+            <div class="instr dice">
+              <p>Input number of dice to view the associated binomial distribution.</p>
+              <p>Glitch: At least half of dice are 1</p>
+              <p>Critical Glitch: At least half of dice are 1 AND no hits</p>
+            </div>
             <div class="instr findN uk-hidden"><p>Input desired hits and probability to find associated dice pool size.</p></div>
             <div class="instr options uk-hidden"><p>Hopefully self-explanatory...</p></div>
           </div> <!-- accordion -->
@@ -112,31 +116,38 @@
   <script type="text/javascript" src="assets/js/Chart.js"></script>
   <script type="text/javascript" src="assets/js/nouislider.min.js"></script>
   <script type="text/javascript">
+   function computeGlitches(value) {
+       var Glitch = {
+           standard: 0,
+           critical: 0,
+       };
+       if (value % 2 == 0) {
+           Glitch.standard = (1 - cdf((value / 2) - 1, value, 1/6));
+       } else {
+           Glitch.standard = (1 - cdf(Math.floor(value / 2), value, 1/6));
+       }
+       var zeroToTotalRatio = Math.pow(2/3, value);
+       var chanceGivenNoHits = 1 - cdf(0, value, 1/4);
+       Glitch.critical = zeroToTotalRatio * chanceGivenNoHits;
+       return Glitch;
+   }
+
    function updateChart(chart, ctx, value) {
        chart.data.labels = range(0, value + 1).map(String);
        chart.data.datasets[0].data = cdfGreaterThanOrEqual(value, 1/3).yVals;
-       var glitch;
-       var zeroHits;
-       if (value % 2 == 0) {
-           glitch = (1 - cdf((value / 2), value, 1/6)).toPrecision(4);
-       } else {
-           glitch = (1 - cdf(Math.floor(value / 2), value, 1/6)).toPrecision(4);
-       }
-
-       zeroHits = pmf(0, value, (1/3));
-       $("#glitch").val(glitch);
-       $("#criticalGlitch").val((glitch * zeroHits).toPrecision(4));
-       console.log("glitch: " + glitch);
-       console.log("zeroHits: " + zeroHits);
+       var Glitch = computeGlitches(value);
+       $("#glitch").val(Glitch.standard.toPrecision(4));
+       $("#criticalGlitch").val(Glitch.critical.toPrecision(4));
+       //console.log("zeroHits: " + zeroHits);
        var disableAnimation = $("#disableAnim").prop("checked");
        if (disableAnimation) {
            chart.options.animation.duration = 0;
        } else {
            chart.options.animation.duration = 1000;
        }
-
        chart.update();
    }
+
    $(document).ready(function() {
        // disable enter to submit
        $(window).keydown(function(event) {
@@ -228,6 +239,10 @@
            step: 1,
            numberFormat: "n",
            incremental: false,
+           change: function(event, ui) {
+               var newVal = $("#diceInput").val();
+               slider.noUiSlider.set(newVal);
+           },
            spin: function(event, ui) {
                var newVal = ui.value;
                slider.noUiSlider.set(newVal);
