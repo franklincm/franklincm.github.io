@@ -111,3 +111,7 @@ div.uk-grid.main {
 .noUi-background {
   background-color: #2d2721;
 }
+
+.alert {
+  color: #ff0000;
+}
