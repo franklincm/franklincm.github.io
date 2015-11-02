@@ -88,8 +88,13 @@ function cdfGreaterThanOrEqual(n, p) {
         yVals: range(1, n + 1),
     };
     for(var i = 0; i < n; i++) {
-        data.yVals[i+1] = (Math.abs(1 - cdf(data.xVals[i] -1, n, p)))
-            .toPrecision(4);
+        var temp = Math.abs(1 - cdf(data.xVals[i] -1, n, p));
+        if (temp < 0.01) {
+            temp = temp.toExponential(4);
+        } else {
+            temp = temp.toPrecision(4);
+        }
+        data.yVals[i+1] = temp;
     }
     return data;
 }
