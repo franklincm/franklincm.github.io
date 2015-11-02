@@ -220,7 +220,6 @@
            $("#diceInput").val(newValue);
            updateChart(lineChart, ctx, newValue);
        });
-       //$(".ui-slider-handle").draggable();
 
        $("#diceInput").spinner({
            min: 1,
@@ -232,7 +231,6 @@
            spin: function(event, ui) {
                var newVal = ui.value;
                slider.noUiSlider.set(newVal);
-               //$( "#slider-range-min" ).slider( "option", "value", newVal );
            }
        });
 
@@ -273,7 +271,7 @@
            var probability = Number($("#probInput").val());
            var pool = find_n(hits, probability);
            $("#result").val(pool);
-           updateChart(lineChart, ctx, pool);
+           slider.noUiSlider.set(pool);
        })
        $("#diceInput").val(slider.noUiSlider.get());
 
