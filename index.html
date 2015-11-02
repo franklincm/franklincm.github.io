@@ -22,6 +22,7 @@
   <link rel="stylesheet" href="assets/css/normalize.css">
   <link rel="stylesheet" href="assets/css/uikit.gradient.min.css">
   <link rel="stylesheet" href="assets/css/jquery-ui.min.css">
+  <link rel="stylesheet" href="assets/css/nouislider.min.css">
   <link rel="stylesheet" href="assets/css/custom.css">
 
   <!-- JS
@@ -29,11 +30,11 @@
   <script type="text/javascript" src="assets/js/binomial.js"></script>
   <script type="text/javascript" src="assets/js/jquery.js"></script>
   <script type="text/javascript" src="assets/js/jquery-ui.min.js"></script>
-  <script type="text/javascript" src="assets/js/jquery.ui.touch-punch.min.js"></script>
   <script type="text/javascript" src="assets/js/uikit.min.js"></script>
   <script type="text/javascript" src="assets/js/components/accordion.min.js"></script>
   <script type="text/javascript" src="assets/js/moment.min.js"></script>
   <script type="text/javascript" src="assets/js/Chart.js"></script>
+  <script type="text/javascript" src="assets/js/nouislider.min.js"></script>
 
 
   <!-- Favicon
@@ -171,6 +172,7 @@
        });
 
        var defaultDice = 10;
+       /*
        $("#slider-range-min").slider({
            range: "min",
            value: defaultDice,
@@ -185,7 +187,27 @@
                updateChart(lineChart, ctx, ui.value);
            }
        });
-       $(".ui-slider-handle").draggable();
+       */
+       var slider = document.getElementById('slider-range-min');
+       noUiSlider.create(slider, {
+           start: 10,
+           step: 1,
+           range: {
+               'min': 1,
+               'max': 50,
+           },
+           connect: 'lower',
+           direction: 'ltr',
+           orientation: 'horizontal',
+           behaviour: 'tap',
+       });
+
+       slider.noUiSlider.on('update', function() {
+           var newValue = slider.noUiSlider.get();
+           $("#diceInput").val(newValue);
+           updateChart(lineChart, ctx, newValue);
+       });
+       //$(".ui-slider-handle").draggable();
 
        $("#diceInput").spinner({
            min: 1,
@@ -196,7 +218,8 @@
            incremental: false,
            spin: function(event, ui) {
                var newVal = ui.value;
-               $( "#slider-range-min" ).slider( "option", "value", newVal );
+               slider.noUiSlider.set(newVal);
+               //$( "#slider-range-min" ).slider( "option", "value", newVal );
            }
        });
 
@@ -239,7 +262,7 @@
            $("#result").val(pool);
            updateChart(lineChart, ctx, pool);
        })
-       $("#diceInput").val($("#slider-range-min").slider("value"));
+       $("#diceInput").val(slider.noUiSlider.get());
 
        $(".uk-accordion-title").click(function() {
            var elem = '.' + $(this).attr('data');

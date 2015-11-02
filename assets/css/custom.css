@@ -89,6 +89,25 @@ div.uk-grid.main {
 }
 
 #slider-range-min {
+  margin-top: 10px;
   -ms-touch-action: none;
   touch-action: none;
+}
+
+.noUi-target {
+  width: 90%;
+}
+
+.noUi-connect {
+  background-color: #5e4f43;
+}
+
+.noUi-handle {
+  background-color: #312b23;
+  border: 1px solid #695444;
+  box-shadow: #000 0px 0px 1px 0px inset;
+}
+
+.noUi-background {
+  background-color: #2d2721;
 }
