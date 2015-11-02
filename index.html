@@ -118,7 +118,7 @@
        var glitch;
        var zeroHits;
        if (value % 2 == 0) {
-           glitch = (1 - cdf((value / 2) - 1, value, 1/6)).toPrecision(4);
+           glitch = (1 - cdf((value / 2), value, 1/6)).toPrecision(4);
        } else {
            glitch = (1 - cdf(Math.floor(value / 2), value, 1/6)).toPrecision(4);
        }
