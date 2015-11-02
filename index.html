@@ -58,16 +58,21 @@
                 <input class="numInput" type="number" id="diceInput" />
                 <label for="diceInput">Number of Dice</label>
                 <div id="slider-range-min"></div>
+                <input class="numInput" id="glitch" disabled="disabled"/>
+                <label for="glitch">% glitch</label>
+                <br/>
+                <input class="numInput" id="criticalGlitch" disabled="disabled"/>
+                <label for="criticalGlitch">% critical glitch</label>
               </form>
             </div>
             <h3 class="uk-accordion-title" data="findN"><i class="uk-icon-caret-right"></i> Find N</h3>
             <div class="uk-accordion-content">
               <form class="findn uk-form">
                 <input class="numInput" type="number" id="hitInput" value="4"/>
-                <label for="hitInput">Desired Hits</label>
+                <label for="hitInput">Hits</label>
                 <br/>
                 <input class="numInput" type="number" id="probInput" value=".75"/>
-                <label for="probInput">Desired Probability</label>
+                <label for="probInput">Probability</label>
                 <button id="findN">Compute</button>
                 <br/>
                 <br/>
@@ -110,6 +115,19 @@
    function updateChart(chart, ctx, value) {
        chart.data.labels = range(0, value + 1).map(String);
        chart.data.datasets[0].data = cdfGreaterThanOrEqual(value, 1/3).yVals;
+       var glitch;
+       var zeroHits;
+       if (value % 2 == 0) {
+           glitch = (1 - cdf((value / 2) - 1, value, 1/6)).toPrecision(4);
+       } else {
+           glitch = (1 - cdf(Math.floor(value / 2), value, 1/6)).toPrecision(4);
+       }
+
+       zeroHits = pmf(0, value, (1/3));
+       $("#glitch").val(glitch);
+       $("#criticalGlitch").val((glitch * zeroHits).toPrecision(4));
+       console.log("glitch: " + glitch);
+       console.log("zeroHits: " + zeroHits);
        var disableAnimation = $("#disableAnim").prop("checked");
        if (disableAnimation) {
            chart.options.animation.duration = 0;
