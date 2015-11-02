@@ -25,21 +25,9 @@
   <link rel="stylesheet" href="assets/css/nouislider.min.css">
   <link rel="stylesheet" href="assets/css/custom.css">
 
-  <!-- JS
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <script type="text/javascript" src="assets/js/binomial.js"></script>
-  <script type="text/javascript" src="assets/js/jquery.js"></script>
-  <script type="text/javascript" src="assets/js/jquery-ui.min.js"></script>
-  <script type="text/javascript" src="assets/js/uikit.min.js"></script>
-  <script type="text/javascript" src="assets/js/components/accordion.min.js"></script>
-  <script type="text/javascript" src="assets/js/moment.min.js"></script>
-  <script type="text/javascript" src="assets/js/Chart.js"></script>
-  <script type="text/javascript" src="assets/js/nouislider.min.js"></script>
-
-
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <!-- <link rel="icon" type="image/png" href="images/favicon.png"> -->
+  <link rel="icon" type="image/png" href="assets/img/favicon.ico" sizes="16x16 32x32 64x64">
 
 </head>
 <body>
@@ -110,7 +98,14 @@
     </div>
 
   </div> <!-- outer grid -->
-
+  <script type="text/javascript" src="assets/js/binomial.js"></script>
+  <script type="text/javascript" src="assets/js/jquery.js"></script>
+  <script type="text/javascript" src="assets/js/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="assets/js/uikit.min.js"></script>
+  <script type="text/javascript" src="assets/js/components/accordion.min.js"></script>
+  <script type="text/javascript" src="assets/js/moment.min.js"></script>
+  <script type="text/javascript" src="assets/js/Chart.js"></script>
+  <script type="text/javascript" src="assets/js/nouislider.min.js"></script>
   <script type="text/javascript">
    function updateChart(chart, ctx, value) {
        chart.data.labels = range(0, value + 1).map(String);
@@ -139,7 +134,7 @@
                {
                    label: 'Probability',
                    fill: true,
-                   backgroundColor: "rgba(155, 204, 96, 0.1)",
+                   backgroundColor: "rgba(155, 204, 96, 0.5)",
                    borderColor: "rgba(155, 204, 96, 1)",
                    borderCapStyle: 'round',
                    borderDash: [],
