@@ -82,7 +82,7 @@
             </div>
             <h3 class="uk-accordion-title" data="glitching"><i class="uk-icon-caret-right"></i> Glitching</h3>
             <div class="uk-accordion-content">
-              <input class="numInput" type="number" id="glitchNum" value="20"/>
+              <input class="numInput" type="number" id="glitchNum" value="10"/>
               <label for="glitchNum">Max</label>
               <button id="showGlitches">Graph Glitches</button>
               <br/>
@@ -105,6 +105,7 @@
               <p><span class="alert">Critical Glitch</span>: At least half of dice are 1 AND no hits</p>
             </div>
             <div class="instr findN uk-hidden"><p>Input desired hits and probability to find associated dice pool size.</p></div>
+            <div class="instr glitching uk-hidden"><p>Probabilities of glitching and critically glitching for x = dice pool size</p></div>
             <div class="instr options uk-hidden"><p>Hopefully self-explanatory...</p></div>
           </div> <!-- accordion -->
 
@@ -329,7 +330,7 @@
        $("#glitchNum").spinner({
            min: 1,
            max: 20,
-           value: 20,
+           value: 10,
            step: 1,
            numberFormat: "n",
        });
