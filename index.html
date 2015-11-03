@@ -296,6 +296,13 @@
            }
        });
 
+       $("#diceInput").keyup(function(event) {
+           if(event.keyCode == 13) {
+               var newVal = $("#diceInput").val();
+               slider.noUiSlider.set(newVal);
+           }
+       });
+
        $("#hitInput").spinner({
            min: 1,
            max: 50,
@@ -335,6 +342,12 @@
            numberFormat: "n",
        });
 
+       $("#glitchNum").keyup(function(event) {
+           if(event.keyCode == 13) {
+               $("#showGlitches").click();
+           }
+       });
+
        $("#findN").button().click(function(event) {
            event.preventDefault();
            var hits = Number($("#hitInput").val());
@@ -348,6 +361,12 @@
            var val = parseInt($("#glitchNum").val());
            console.log(typeof(val));
            graphGlitches(lineChart, ctx, val);
+       });
+
+       $("#showGlitches").keyup(function(event) {
+           if(event.keyCode == 13) {
+               $("#showGlitches").click();
+           }
        });
 
        $("#diceInput").val(slider.noUiSlider.get());
