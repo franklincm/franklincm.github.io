@@ -115,3 +115,25 @@ div.uk-grid.main {
 .alert {
   color: #ff0000;
 }
+
+.box {
+  height: 10px;
+  width: 10px;
+  display: inline-block;
+}
+
+.color1 {
+  background-color: rgba(55,55,39,1);
+  border: 2px solid #9bcc60;
+}
+
+.color2 {
+  background-color: rgba(89,88,71,1);
+  border: 2px solid #695444;
+}
+
+.legend {
+  background-color: #2d2721;
+  padding: 5px;
+  margin-top: 5px;
+}

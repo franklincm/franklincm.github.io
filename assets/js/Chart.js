@@ -2635,26 +2635,26 @@
 		xOffset: 10,
 		multiKeyBackground: '#fff',
 		callbacks: {
-			beforeTitle: helpers.noop,
-			title: function(xLabel, yLabel, index, datasetIndex, data) {
-				// Pick first label for now
-				return helpers.isArray(xLabel) ? "at least " + xLabel[0] + " hits": xLabel;
-			},
-			afterTitle: helpers.noop,
+		    beforeTitle: helpers.noop,
+		    title: function(xLabel, yLabel, index, datasetIndex, data) {
+			// Pick first label for now
+			return helpers.isArray(xLabel) ? "x = " + xLabel[0]: "x = " + xLabel;
+		    },
+		    afterTitle: helpers.noop,
 
-			beforeBody: helpers.noop,
+		    beforeBody: helpers.noop,
 
-			beforeLabel: helpers.noop,
-			label: function(xLabel, yLabel, index, datasetIndex, data) {
-				return this._data.datasets[datasetIndex].label + ': ' + yLabel;
-			},
-			afterLabel: helpers.noop,
+		    beforeLabel: helpers.noop,
+		    label: function(xLabel, yLabel, index, datasetIndex, data) {
+			return this._data.datasets[datasetIndex].label + ': ' + yLabel;
+		    },
+		    afterLabel: helpers.noop,
 
-			afterBody: helpers.noop,
+		    afterBody: helpers.noop,
 
-			beforeFooter: helpers.noop,
-			footer: helpers.noop,
-			afterFooter: helpers.noop,
+		    beforeFooter: helpers.noop,
+		    footer: helpers.noop,
+		    afterFooter: helpers.noop,
 		},
 	};
 
