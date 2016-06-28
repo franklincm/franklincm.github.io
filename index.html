@@ -39,6 +39,7 @@
         <script src="bower_components/sigma_latest/build/sigma.min.js"></script>
         <script src="bower_components/sigma_latest/build/plugins/sigma.layout.forceAtlas2.min.js"></script>
         <script src="bower_components/sigma_latest/build/plugins/sigma.plugins.animate.min.js"></script>
+        
         <script>
          
          var i,
@@ -56,12 +57,12 @@
          for (i = 0; i < N; i++) {
              o = {
                  id: 'n' + i,
-                 //label: 'Node ' + i,
                  label: null,
                  x: Math.random(),
                  y: Math.random(),
                  size: ((Math.random() * 5 | 0) % 5) + 3,
-                 color: '#348899'
+                 color: '#348899',
+                 hover_color: '#abf2ff'
              };
              g.nodes.push(o);
          }
@@ -86,63 +87,40 @@
                  type: 'canvas'
              },
              settings: {
+                 //animationsTime: 1000,
                  doubleClickEnabled: false,
                  enableEdgeHovering: true,
                  edgeHoverColor: 'default',
-                 defaultEdgeHoverColor: '#979c9c',
-                 edgeHoverSizeRatio: 2,
+                 //defaultEdgeHoverColor: '#979c9c',
+                 defaultEdgeHoverColor: '#9DFE91',
+                 edgeHoverSizeRatio: 3,
                  edgeHoverExtremities: true,
+                 edgeHoverPrecision: 1,
 
-                 borderSize: 2,
-                 //defaultNodeBorderColor: '#343642',
-                 defaultNodeBorderColor: '#6fd862',
-                 nodeHoverColor: 'node',
-                 
+                 borderSize: 1,
+                 defaultNodeBorderColor: '#57e4ff',
+                 //defaultNodeBorderColor: '#6fd862',
+                 defaultNodeHoverColor: '#abf2ff',
+                 nodeHoverColor: 'default',
+                 batchEdgesDrawing: false,
+                 canvasEdgesBatchSize: 100
              }
          });
-         
+
          function signalContact(id, duration, sigInst) {
-             var edge = sigInst.graph.edges(id);
-             var source = sigInst.graph.nodes(edge.source);
-             var target = sigInst.graph.nodes(edge.target);
+             var data = {
+                 edge: sigInst.graph.edges(id)
+             };
 
-             var edge_orig_color = edge.color;
-             var src_orig_color = source.color;
-             var src_orig_size = source.size;
-             var trg_orig_color = target.color;
-             var trg_orig_size = target.size;
-
-             //edge.color = '#6fd862';
-             edge.color = '#f00';
+             sigInst.renderers[0].dispatchEvent('overEdge', data);
              sigInst.refresh();
-             
+
              setTimeout(function() {
-                 edge.color = edge_orig_color;
+                 sigInst.renderers[0].dispatchEvent('outEdge', data);
                  sigInst.refresh();
              }, duration);
-             
-
-             /*
-             var src_data = {
-                 node: source,
-             };
-             
-             var trg_data = {
-                 node: target,
-             };
-             */
-                 
-             //sigInst.renderers[0].dispatchEvent('overNode', src_data);
-             //sigInst.renderers[0].dispatchEvent('overNode', trg_data);
-             //sigInst.renderers[0].dispatchEvent('outNode', data);
-             
-             //console.log(source);
-             //not working...
-             //edge.size = 10;
-
-             sigInst.refresh();
          }
-
+         
          // refresh display
          s.refresh();
 
@@ -155,18 +133,38 @@
              s.stopForceAtlas2();
          }, 1500);
          
+         
+         s.bind('overEdge', function(e) {
+             var source = s.graph.edges(e.data.edge.id).source;
+             var target = s.graph.edges(e.data.edge.id).target;
 
-         // signalContact test
+             s.graph.nodes(source).color = '#abf2ff';
+             s.graph.nodes(target).color = '#abf2ff';
+             //s.refresh();
+         });
 
-         signalContact('e10', 400, s);
+         s.bind('outEdge', function(e) {
+             var source = s.graph.edges(e.data.edge.id).source;
+             var target = s.graph.edges(e.data.edge.id).target;
 
-         setInterval(function() {
-             // create counter
-             // increment and modulo
-             // select 'e' + counter
-             // signalContact
-         }, 200);
+             s.graph.nodes(source).color = 'node';
+             s.graph.nodes(target).color = 'node';
+             //s.refresh();
+         });
+         
+         setTimeout(function() {
+             var interval = setInterval(function() {
 
+                 signalContact('e' + ((Math.random() * E | 0) % E) , 25, s);
+             
+             }, 50);
+
+             setTimeout(function() {
+                 clearInterval(interval);
+             }, 10000);
+
+         }, 2000);
+         
         </script>
     </body>
 </html>
