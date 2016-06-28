@@ -1,120 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+    <head>
+        <!-- Basic
+             –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
 
-  <!-- Basic Page Needs
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta charset="utf-8">
-  <title>dieStats</title>
-  <meta name="dieStats" content="">
-  <meta name="" content="">
+        <!-- OpenGraph
+             –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
-  <!-- Mobile Specific Metas
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Twitter Card
+             –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
-  <!-- CSS
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" href="assets/css/dieStats.min.css">
-  <!-- Favicon
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="icon" type="image/png" href="assets/img/favicon.ico" sizes="16x16 32x32 64x64">
+        <!-- CSS
+             –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+        <!-- <link rel="stylesheet" type="text/css" href="" rel="stylesheet" /> -->
 
-</head>
-<body>
-  <div class="uk-grid">
-    <div class="uk-width-large-1-5">
-    </div>
-    <div class="uk-width-large-3-5">
-      <div class="uk-grid">
-        <div class="uk-width-1-1 title">
-          <h1>dieStats</h1>
-        </div>
-      </div>
-      <div class="uk-grid main">
+        <!-- Favicon
+             –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+        <title>Sigma.js Demo</title>
 
-        <div class="uk-width-large-8-10 graph">
+        <style type="text/css">
+         body {
+             margin: 0;
+         }
+         #container {
+             position: absolute;
+             width: 90%;
+             height: 90%;
+             background-color: #fff;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script src="bower_components/sigma_latest/build/sigma.min.js"></script>
+        <script src="bower_components/sigma_latest/build/plugins/sigma.layout.forceAtlas2.min.js"></script>
+        <script src="bower_components/sigma_latest/build/plugins/sigma.plugins.animate.min.js"></script>
+        <script>
+         
+         var i,
+             s,
+             o,
+             L = 10,
+             N = 25,
+             E = 100,
+             g = {
+                 nodes: [],
+                 edges: []
+             };
+         
+         // nodes
+         for (i = 0; i < N; i++) {
+             o = {
+                 id: 'n' + i,
+                 //label: 'Node ' + i,
+                 label: null,
+                 x: Math.random(),
+                 y: Math.random(),
+                 size: ((Math.random() * 5 | 0) % 5) + 3,
+                 color: '#348899'
+             };
+             g.nodes.push(o);
+         }
 
-          <!-- GRAPH
-          –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-          <canvas id="myChart" width="268.3698760724499" height="150"></canvas>
-        </div>
-        <!-- CONTROLS
-        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-        <div class="uk-width-large-2-10 controls">
-          <div class="uk-accordion" data-uk-accordion>
-            <h3 class="uk-accordion-title" data="dice"><i class="uk-icon-caret-down"></i> Dice Pool</h3>
-            <div class="uk-accordion-content">
-              <form class="dicePool uk-form">
-                <input class="numInput" type="number" id="diceInput" />
-                <label for="diceInput">Number of Dice</label>
-                <div id="slider-range-min"></div>
-                <input class="numInput" id="glitch" disabled="disabled"/>
-                <label for="glitch">% glitch</label>
-                <br/>
-                <input class="numInput" id="criticalGlitch" disabled="disabled"/>
-                <label for="criticalGlitch">% critical glitch</label>
-              </form>
-            </div>
-            <h3 class="uk-accordion-title" data="findN"><i class="uk-icon-caret-right"></i> Find N</h3>
-            <div class="uk-accordion-content">
-              <form class="findn uk-form">
-                <input class="numInput" type="number" id="hitInput" value="4"/>
-                <label for="hitInput">Hits</label>
-                <br/>
-                <input class="numInput" type="number" id="probInput" value=".75"/>
-                <label for="probInput">Probability</label>
-                <button id="findN">Compute</button>
-                <br/>
-                <br/>
-                <label for="result">n = </label>
-                <input class="numInput" type="text" id="result" value="" disabled="disabled"/>
-              </form>
-            </div>
-            <h3 class="uk-accordion-title" data="glitching"><i class="uk-icon-caret-right"></i> Glitching</h3>
-            <div class="uk-accordion-content">
-              <input class="numInput" type="number" id="glitchNum" value="10"/>
-              <label for="glitchNum">Max</label>
-              <button id="showGlitches">Graph Glitches</button>
-              <br/>
-              <div class="legend">
-                <span class="box color1"></span><span class="alert">Glitch</span>
-                <br/>
-                <span class="box color2"></span><span class="alert">Critical Glitch</span>
-              </div>
-            </div>
-            <h3 class="uk-accordion-title" data="options"><i class="uk-icon-caret-right"></i> Options</h3>
-            <div class="uk-accordion-content">
-              <label>
-                <input id="disableAnim" type="checkbox">
-                <span class="label-body">Disable Animation</span>
-              </label>
-            </div>
-            <div class="instr dice">
-              <p>Input number of dice to view the associated binomial distribution.</p>
-              <p><span class="alert">Glitch</span>: At least half of dice are 1</p>
-              <p><span class="alert">Critical Glitch</span>: At least half of dice are 1 AND no hits</p>
-            </div>
-            <div class="instr findN uk-hidden"><p>Input desired hits and probability to find associated dice pool size.</p></div>
-            <div class="instr glitching uk-hidden"><p>Probabilities of glitching and critically glitching for x = dice pool size</p></div>
-            <div class="instr options uk-hidden"><p>Hopefully self-explanatory...</p></div>
-          </div> <!-- accordion -->
+         // edges
+         for (i = 0; i < E; i++) {
+             g.edges.push({
+                 id: 'e' + i,
+                 source: 'n' + (Math.random() * N | 0),
+                 target: 'n' + (Math.random() * N | 0),
+                 size: 0.5,
+                 color: '#dcdcdc',
+                 type: 't'
+             })
+         }
 
-        </div> <!-- 2-10 -->
-      </div> <!-- inner grid -->
-      <div class="uk-width-1-1 title">
-        <span class="credit">Powered by <a href="http://www.chartjs.org/"><img src="assets/img/chartjs.png">Chart.js</a></span>
-      </div>
+         // init sigma object
+         s = new sigma({
+             graph: g,
+             renderer: {
+                 container: document.getElementById('container'),
+                 type: 'canvas'
+             },
+             settings: {
+                 doubleClickEnabled: false,
+                 enableEdgeHovering: true,
+                 edgeHoverColor: 'default',
+                 defaultEdgeHoverColor: '#979c9c',
+                 edgeHoverSizeRatio: 2,
+                 edgeHoverExtremities: true,
 
-    </div> <!-- 3-5 -->
-    <div class="uk-width-large-1-5">
-    </div>
+                 borderSize: 2,
+                 //defaultNodeBorderColor: '#343642',
+                 defaultNodeBorderColor: '#6fd862',
+                 nodeHoverColor: 'node',
+                 
+             }
+         });
+         
+         function signalContact(id, duration, sigInst) {
+             var edge = sigInst.graph.edges(id);
+             var source = sigInst.graph.nodes(edge.source);
+             var target = sigInst.graph.nodes(edge.target);
 
-  </div> <!-- outer grid -->
+             var edge_orig_color = edge.color;
+             var src_orig_color = source.color;
+             var src_orig_size = source.size;
+             var trg_orig_color = target.color;
+             var trg_orig_size = target.size;
 
-  <script type="text/javascript" src="assets/js/dieStats.min.js"></script>
+             //edge.color = '#6fd862';
+             edge.color = '#f00';
+             sigInst.refresh();
+             
+             setTimeout(function() {
+                 edge.color = edge_orig_color;
+                 sigInst.refresh();
+             }, duration);
+             
 
-<!-- End Document
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-</body>
+             /*
+             var src_data = {
+                 node: source,
+             };
+             
+             var trg_data = {
+                 node: target,
+             };
+             */
+                 
+             //sigInst.renderers[0].dispatchEvent('overNode', src_data);
+             //sigInst.renderers[0].dispatchEvent('overNode', trg_data);
+             //sigInst.renderers[0].dispatchEvent('outNode', data);
+             
+             //console.log(source);
+             //not working...
+             //edge.size = 10;
+
+             sigInst.refresh();
+         }
+
+         // refresh display
+         s.refresh();
+
+         // start forceAtlas animation
+         s.startForceAtlas2();
+
+         // stop forceAtlas animation after 1.5 secs
+         
+         setTimeout(function() {
+             s.stopForceAtlas2();
+         }, 1500);
+         
+
+         // signalContact test
+
+         signalContact('e10', 400, s);
+
+         setInterval(function() {
+             // create counter
+             // increment and modulo
+             // select 'e' + counter
+             // signalContact
+         }, 200);
+
+        </script>
+    </body>
 </html>
+p
