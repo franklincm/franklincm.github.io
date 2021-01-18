@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <style>
+
+         .links line {
+             stroke: #aaa;
+         }
+
+         .nodes circle {
+             pointer-events: all;
+             stroke: none;
+             stroke-width: 40px;
+         }
+
+        </style>
+    </head>
+    <body>
+        <svg width="600" height="400"></svg>
+        <p>test</p>
+
+        <script src="d3.v4.0.0-alpha.40.min.js"></script>
+        <script>
+
+         var svg = d3.select('svg');
+         var width = +svg.attr('width');
+         var height = +svg.attr('height');
+
+         var simulation = d3.forceSimulation()
+                            .force('link', d3.forceLink().id( function(d) { return d.id; }  ))
+                            .force('center', d3.forceCenter(width / 2, height /2))
+                            .force('charge', d3.forceManyBody().strength(-20).theta(0.9));
+
+         d3.json('data.json', function(error, graph) {
+             if (error) throw error;
+
+
+             /*
+              * create empty dom elements for graph components
+              */
+
+             // edges
+             var link = svg.append('g')
+                           .attr('class', 'links')
+                           .selectAll('line')
+                           .data(graph.links)
+                           .enter()
+                           .append('line');
+
+             // nodes
+             var node = svg.append('g')
+                           .attr('class', 'nodes')
+                           .selectAll('circle')
+                           .data(graph.nodes)
+                           .enter()
+                           .append('circle')
+                           .attr('r', 3);
+
+             node.append('title')
+                 .text(function(d) { return d.name; });
+
+             simulation.nodes(graph.nodes)
+                       .on('tick', ticked);
+
+             simulation.force('link')
+                       .links(graph.links);
+
+             function ticked() {
+                 link
+                         .attr("x1", function(d) { return d.source.x; })
+                         .attr("y1", function(d) { return d.source.y; })
+                         .attr("x2", function(d) { return d.target.x; })
+                         .attr("y2", function(d) { return d.target.y; });
+
+                 node
+                         .attr("cx", function(d) { return d.x; })
+                         .attr("cy", function(d) { return d.y; });
+             }
+         });
+        </script>
+    </body>
+</html>
